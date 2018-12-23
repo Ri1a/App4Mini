@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="Form" layout="LayeredLayout" layeredLayoutPreferredWidthMM="0.0" layeredLayoutPreferredHeightMM="0.0"  autolayout="true" styles="alignment:center;" title="WelcomeForm" scrollableY="true" name="WelcomeForm">
+  <component type="Button" text="Starten" styles="font:8.0mm;" preferredSize="inherit 16.137566mm" name="btnStarten" actionEvent="true">
+    <layoutConstraint insets="31.026253% 25.0% 60.739857% 25.0%" referenceComponents="-1 -1 -1 -1" referencePositions="0.0 0.0 0.0 0.0" />
+  </component>
+</component>
