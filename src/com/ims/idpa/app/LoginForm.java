@@ -1,17 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ims.idpa.app;
 
 import com.codename1.io.Preferences;
-import com.codename1.ui.TextField;
 
 /**
  * GUI builder created Form
  *
- * @author ricky
+ * @author Riccardo, Joel, Yanick, Alain
  */
 public class LoginForm extends com.codename1.ui.Form {
 
@@ -97,8 +91,6 @@ public class LoginForm extends com.codename1.ui.Form {
 
 //-- DON'T EDIT ABOVE THIS LINE!!!
     public void onStartActionEvent(com.codename1.ui.events.ActionEvent ev) {
-
-        //CN1 components
         LoginForm loginForm = new LoginForm();
         IndexForm indexForm = new IndexForm();
 
@@ -106,14 +98,12 @@ public class LoginForm extends com.codename1.ui.Form {
         consumer_key = gui_txtCK.getText();
         secret_key = gui_txtSK.getText();
 
-        //For testing -> delete after testing
-        System.out.println("Input: " + shop_name + " " + consumer_key + " " + secret_key);
-
         if (shop_name == null || consumer_key == null || secret_key == null) {
             loginForm.show();
         } else {
 
             //Using the Storage API
+            //Preferences.clearAll();
             Preferences.set("shop_name", shop_name);
             Preferences.set("consumer_key", consumer_key);
             Preferences.set("secret_key", secret_key);

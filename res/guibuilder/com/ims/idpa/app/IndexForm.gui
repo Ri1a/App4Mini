@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<component type="Form" layout="LayeredLayout" title="IndexForm" name="IndexForm" autoLayout="true"></component>
+<component type="Form" layout="LayeredLayout" layeredLayoutPreferredWidthMM="0.0" layeredLayoutPreferredHeightMM="0.0"  autolayout="true" title="IndexForm" scrollableY="true" name="IndexForm">
+  <component type="Label" text="Index" styles="font:6.0mm;" name="Label">
+    <layoutConstraint insets="13.872135% 43.78453% auto auto" referenceComponents="-1 -1 -1 -1" referencePositions="0.0 0.0 0.0 0.0" />
+  </component>
+</component>
