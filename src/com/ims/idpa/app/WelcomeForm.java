@@ -29,8 +29,6 @@ public class WelcomeForm extends com.codename1.ui.Form {
     private String productNames;
     ArrayList<String> productsArr = new ArrayList<>();
 
-    //CN1 components
-    LoginForm loginForm = new LoginForm();
     
 
     public WelcomeForm() {
@@ -105,7 +103,7 @@ public class WelcomeForm extends com.codename1.ui.Form {
 //-- DON'T EDIT ABOVE THIS LINE!!!
 
     public void onButtonActionEvent(com.codename1.ui.events.ActionEvent ev) {
-        
+        LoginForm loginForm = new LoginForm();
         loginForm.show();
         
         //Preferences.clearAll();
