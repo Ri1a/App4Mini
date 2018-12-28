@@ -1,5 +1,8 @@
 package com.ims.idpa.app;
 
+import ca.weblite.codename1.json.JSONException;
+import com.codename1.io.Preferences;
+import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Label;
@@ -20,6 +23,9 @@ public class IndexForm extends com.codename1.ui.Form {
     }
 
     public IndexForm(com.codename1.ui.util.Resources resourceObjectInstance) {
+        
+        //TODO: Make an epic index site
+        
 
         //Menu
         Toolbar tb = this.getToolbar();
@@ -28,30 +34,31 @@ public class IndexForm extends com.codename1.ui.Form {
         topBar.setUIID("SideCommand");
         tb.addComponentToSideMenu(topBar);
 
-        tb.addMaterialCommandToSideMenu("Home", FontImage.MATERIAL_HOME, new ActionListener() {
+        tb.addMaterialCommandToSideMenu("Home", FontImage.MATERIAL_HOME, (ActionListener) (ActionEvent evt) -> {
+            new IndexForm().show();
+        });
+        tb.addMaterialCommandToSideMenu("Produkte", FontImage.MATERIAL_WEB, (ActionListener) new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                new IndexForm().show();
+                    new ProdukteForm().show();
             }
         });
-        tb.addMaterialCommandToSideMenu("Produkte", FontImage.MATERIAL_WEB, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                new ProdukteForm().show();
-            }
+        tb.addMaterialCommandToSideMenu("Bestellungen", FontImage.MATERIAL_SHOPPING_CART, (ActionListener) (ActionEvent evt) -> {
+            new BestellungenForm().show();
         });
-        tb.addMaterialCommandToSideMenu("Bestellungen", FontImage.MATERIAL_SHOPPING_CART, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                new BestellungenForm().show();
-            }
+        tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_POWER_SETTINGS_NEW, (ActionListener) (ActionEvent evt) -> {
+            Preferences.clearAll();
+            new LoginForm().show();
         });
+
+        Label top = new Label("Willkommen, " + Preferences.get("shop_name", null));
+        top.setTextPosition(Component.TOP);
+        this.add(top);
 
         initGuiBuilderComponents(resourceObjectInstance);
     }
 
 //-- DON'T EDIT BELOW THIS LINE!!!
-    private com.codename1.ui.Label gui_Label = new com.codename1.ui.Label();
 
 
 // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
@@ -62,12 +69,6 @@ public class IndexForm extends com.codename1.ui.Form {
                 setInlineStylesTheme(resourceObjectInstance);
         setTitle("IndexForm");
         setName("IndexForm");
-        addComponent(gui_Label);
-        gui_Label.setText("Index");
-                gui_Label.setInlineStylesTheme(resourceObjectInstance);
-        gui_Label.setInlineAllStyles("font:6.0mm;");
-        gui_Label.setName("Label");
-        ((com.codename1.ui.layouts.LayeredLayout)gui_Label.getParent().getLayout()).setInsets(gui_Label, "13.872135% 43.78453% auto auto").setReferenceComponents(gui_Label, "-1 -1 -1 -1").setReferencePositions(gui_Label, "0.0 0.0 0.0 0.0");
     }// </editor-fold>
 
 //-- DON'T EDIT ABOVE THIS LINE!!!

@@ -5,10 +5,10 @@
  */
 package com.ims.cmp;
 
+import ca.weblite.codename1.json.JSONException;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkManager;
-import com.ims.idpa.app.IndexForm;
 import com.ims.idpa.app.LoginForm;
 import com.ims.idpa.app.WelcomeForm;
 import java.io.ByteArrayInputStream;
@@ -19,14 +19,15 @@ import java.util.Map;
 
 /**
  *
- * @author ricky
+ * @author Riccardo, Joel, Yanick, Alain
  */
 public class Produkte {
 
-    private String productNames;
     ArrayList<String> productsArr = new ArrayList<>();
+    ArrayList<String> productImages = new ArrayList<>();
+    ArrayList<String> productStock = new ArrayList<>();
 
-    public void getProdukte() {
+    public void getProdukte() throws JSONException {
         LoginForm loginForm = new LoginForm();
 
         WelcomeForm tokens = new WelcomeForm();
@@ -38,15 +39,20 @@ public class Produkte {
             NetworkManager.getInstance().addToQueueAndWait(r);
             Map<String, Object> result = new JSONParser().parseJSON(new InputStreamReader(new ByteArrayInputStream(r.getResponseData()), "UTF-8"));
 
-            //JSON Filter
+            //JSON Filter     
             ArrayList<Map<String, String>> myList = (ArrayList<Map<String, String>>) result.get("root");
             for (int i = 0; i < myList.size(); i++) {
+
                 Map<String, String> dtls = myList.get(i);
-                productNames = dtls.get("name");
-                productsArr.add(productNames);
-                //GET PRODUCT IMAGES, DESCRIPTION
+                //Get name, image, stock
+                productsArr.add(dtls.get("name"));
+                productImages.add(dtls.get("images"));
+                productStock.add(dtls.get("stock_status"));
+                //TODO: Filter out image-source
 
             }
+            //For testing -> delete after
+            //System.out.println(productImages);
 
         } catch (IOException err) {
             loginForm.show();
@@ -56,6 +62,14 @@ public class Produkte {
 
     public ArrayList<String> getProductsArr() {
         return productsArr;
+    }
+
+    public ArrayList<String> getProductImages() {
+        return productImages;
+    }
+
+    public ArrayList<String> getProductStock() {
+        return productStock;
     }
 
 }

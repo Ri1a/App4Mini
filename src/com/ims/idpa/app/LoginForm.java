@@ -1,6 +1,10 @@
 package com.ims.idpa.app;
 
 import com.codename1.io.Preferences;
+import com.codename1.ui.Container;
+import com.codename1.ui.TextArea;
+import com.codename1.ui.TextField;
+import com.codename1.ui.layouts.BoxLayout;
 
 /**
  * GUI builder created Form
@@ -18,6 +22,9 @@ public class LoginForm extends com.codename1.ui.Form {
     }
 
     public LoginForm(com.codename1.ui.util.Resources resourceObjectInstance) {
+
+        //TODO Create nice login
+
         initGuiBuilderComponents(resourceObjectInstance);
     }
 
@@ -82,11 +89,11 @@ public class LoginForm extends com.codename1.ui.Form {
                 gui_txtSK.setInlineStylesTheme(resourceObjectInstance);
         gui_txtSK.setName("txtSK");
         ((com.codename1.ui.layouts.LayeredLayout)gui_txtSK.getParent().getLayout()).setInsets(gui_txtSK, "9.166667% 50.0% auto 0.0mm").setReferenceComponents(gui_txtSK, "0 -1 -1 1 ").setReferencePositions(gui_txtSK, "1.0 0.0 0.0 0.0");
-        gui_Start.setPreferredSizeStr("72.75132mm 24.867725mm");
-        gui_Start.setText("Startt");
+        gui_Start.setPreferredSizeStr("34.391533mm 9.78836mm");
+        gui_Start.setText("Log In");
                 gui_Start.setInlineStylesTheme(resourceObjectInstance);
         gui_Start.setName("Start");
-        ((com.codename1.ui.layouts.LayeredLayout)gui_Start.getParent().getLayout()).setInsets(gui_Start, "9.650924% 25.276241% auto auto").setReferenceComponents(gui_Start, "2 -1 -1 -1").setReferencePositions(gui_Start, "1.0 0.0 0.0 0.0");
+        ((com.codename1.ui.layouts.LayeredLayout)gui_Start.getParent().getLayout()).setInsets(gui_Start, "26.366467% auto auto 0.0mm").setReferenceComponents(gui_Start, "2 -1 -1 -1").setReferencePositions(gui_Start, "1.0 0.0 0.0 0.0");
     }// </editor-fold>
 
 //-- DON'T EDIT ABOVE THIS LINE!!!
@@ -102,7 +109,7 @@ public class LoginForm extends com.codename1.ui.Form {
             loginForm.show();
         } else {
 
-            //Using the Storage API
+            //Using the Preferences API
             //Preferences.clearAll();
             Preferences.set("shop_name", shop_name);
             Preferences.set("consumer_key", consumer_key);

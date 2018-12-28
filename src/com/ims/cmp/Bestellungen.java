@@ -45,7 +45,6 @@ public class Bestellungen {
                 ordersStatusArr.add(orderStatus);
 
             }
-            System.out.println(ordersArr);
 
         } catch (IOException err) {
             loginForm.show();

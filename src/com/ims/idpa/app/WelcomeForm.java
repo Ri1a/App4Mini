@@ -78,13 +78,13 @@ public class WelcomeForm extends com.codename1.ui.Form {
                 gui_lblWelcome.setInlineStylesTheme(resourceObjectInstance);
         gui_lblWelcome.setInlineAllStyles("font:8.0mm; alignment:center;");
         gui_lblWelcome.setName("lblWelcome");
-        ((com.codename1.ui.layouts.LayeredLayout)gui_lblWelcome.getParent().getLayout()).setInsets(gui_lblWelcome, "11.987861% auto auto 0.0mm").setReferenceComponents(gui_lblWelcome, "-1 -1 -1 1 ").setReferencePositions(gui_lblWelcome, "0.0 0.0 0.0 0.0");
-        gui_Button.setPreferredSizeStr("130.15874mm 16.666666mm");
+        ((com.codename1.ui.layouts.LayeredLayout)gui_lblWelcome.getParent().getLayout()).setInsets(gui_lblWelcome, "11.987861% auto auto auto").setReferenceComponents(gui_lblWelcome, "-1 -1 -1 1 ").setReferencePositions(gui_lblWelcome, "0.0 0.0 0.0 0.0");
+        gui_Button.setPreferredSizeStr("43.650795mm 10.8465605mm");
         gui_Button.setText("Starten");
                 gui_Button.setInlineStylesTheme(resourceObjectInstance);
-        gui_Button.setInlineAllStyles("font:8.0mm;");
+        gui_Button.setInlineAllStyles("font:6.0mm;");
         gui_Button.setName("Button");
-        ((com.codename1.ui.layouts.LayeredLayout)gui_Button.getParent().getLayout()).setInsets(gui_Button, "auto auto auto auto").setReferenceComponents(gui_Button, "-1 -1 -1 -1").setReferencePositions(gui_Button, "0.0 0.0 0.0 0.0");
+        ((com.codename1.ui.layouts.LayeredLayout)gui_Button.getParent().getLayout()).setInsets(gui_Button, "46.882217% auto 41.801384% auto").setReferenceComponents(gui_Button, "-1 -1 -1 -1").setReferencePositions(gui_Button, "0.0 0.0 0.0 0.0");
     }// </editor-fold>
 
 //-- DON'T EDIT ABOVE THIS LINE!!!

@@ -1,10 +1,6 @@
-package com.ims.idpa.app;
+package com.ims.unused;
 
-import com.codename1.ui.Container;
 import com.codename1.ui.Form;
-import com.codename1.ui.Dialog;
-import com.codename1.ui.util.Resources;
-
 
 public class Menu extends Form  {
     public Menu(com.codename1.ui.util.Resources resourceObjectInstance) {
@@ -24,3 +20,5 @@ public class Menu extends Form  {
     }// </editor-fold>
 //-- DON'T EDIT ABOVE THIS LINE!!!
 }
+
+//Unused -> Can't delete it

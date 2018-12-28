@@ -10,7 +10,7 @@
   <component type="TextField" text="Secret Key" name="txtSK">
     <layoutConstraint insets="9.166667% 50.0% auto 0.0mm" referenceComponents="0 -1 -1 1 " referencePositions="1.0 0.0 0.0 0.0" />
   </component>
-  <component type="Button" text="Startt" preferredSize="72.75132mm 24.867725mm" name="Start" actionEvent="true">
-    <layoutConstraint insets="9.650924% 25.276241% auto auto" referenceComponents="2 -1 -1 -1" referencePositions="1.0 0.0 0.0 0.0" />
+  <component type="Button" text="Log In" preferredSize="34.391533mm 9.78836mm" name="Start" actionEvent="true">
+    <layoutConstraint insets="26.366467% auto auto 0.0mm" referenceComponents="2 -1 -1 -1" referencePositions="1.0 0.0 0.0 0.0" />
   </component>
 </component>

@@ -5,17 +5,23 @@
  */
 package com.ims.idpa.app;
 
+import ca.weblite.codename1.json.JSONException;
 import com.codename1.components.MultiButton;
+import com.codename1.io.Preferences;
+import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Label;
+import com.codename1.ui.Tabs;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
 import com.ims.cmp.Bestellungen;
-import com.ims.cmp.Produkte;
+import java.util.List;
 
 /**
  * GUI builder created Form
@@ -24,7 +30,10 @@ import com.ims.cmp.Produkte;
  */
 public class BestellungenForm extends com.codename1.ui.Form {
 
-    MultiButton mb = new MultiButton();
+    Bestellungen bestellungen = new Bestellungen();
+
+    Container conOrdersCompleted = new Container(BoxLayout.y());
+    Container conOrdersProcessing = new Container(BoxLayout.y());
 
     public BestellungenForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
@@ -34,54 +43,84 @@ public class BestellungenForm extends com.codename1.ui.Form {
 
         IndexForm indexForm = new IndexForm();
         ProdukteForm produkteForm = new ProdukteForm();
-
         //Menu
         Toolbar tb = this.getToolbar();
         Container topBar = BorderLayout.east(new Label(""));
         topBar.add(BorderLayout.SOUTH, new Label(""));
         topBar.setUIID("SideCommand");
         tb.addComponentToSideMenu(topBar);
-
-        tb.addMaterialCommandToSideMenu("Home", FontImage.MATERIAL_HOME, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                indexForm.show();
-            }
+        tb.addMaterialCommandToSideMenu("Home", FontImage.MATERIAL_HOME, (ActionListener) (ActionEvent evt) -> {
+            indexForm.show();
         });
-        tb.addMaterialCommandToSideMenu("Produkte", FontImage.MATERIAL_WEB, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                produkteForm.show();
-            }
+        tb.addMaterialCommandToSideMenu("Produkte", FontImage.MATERIAL_WEB, (ActionListener) (ActionEvent evt) -> {
+            produkteForm.show();
         });
-        tb.addMaterialCommandToSideMenu("Bestellungen", FontImage.MATERIAL_SHOPPING_CART, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                new BestellungenForm().show();
-            }
+        tb.addMaterialCommandToSideMenu("Bestellungen", FontImage.MATERIAL_SHOPPING_CART, (ActionListener) (ActionEvent evt) -> {
+            new BestellungenForm().show();
         });
-
-        Bestellungen bestellungen = new Bestellungen();
+        tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_POWER_SETTINGS_NEW, (ActionListener) (ActionEvent evt) -> {
+            Preferences.clearAll();
+            new LoginForm().show();
+        });
+        //Bestellungen bestellungen = new Bestellungen();
         bestellungen.getOrders();
-
         //Show orders in app
-        //PROBLEM: Just one order is being shown
         Container conOrders = new Container(BoxLayout.y());
         conOrders.setUIID("conOrders");
         conOrders.setScrollableY(true);
-
         //Get elements from array
         for (int i = 0; i < bestellungen.getOrdersArr().size(); i++) {
-            String order = bestellungen.getOrdersArr().get(i++);
+            String order = bestellungen.getOrdersArr().get(i);
+            String status = bestellungen.getOrdersStatusArr().get(i);
 
-            MultiButton mb = new MultiButton(order);
-            mb.setTextLine2("Mehr Details...");
-            conOrders.add(mb);
+            //All orders
+            MultiButton mbOrders = new MultiButton(order);
 
+            switch (status) {
+                case "completed":
+                    //Change the second line to color green
+                    setLine2Color(mbOrders, 0x4BA42F);
+                    mbOrders.setTextLine2("Abgeschlossen");
+                    break;
+                case "processing":
+                    //Change the second line to color yellow
+                    setLine2Color(mbOrders, 0xE7E04C);
+                    mbOrders.setTextLine2("Verarbeitung");
+                    break;
+                case "cancelled":
+                    //Change the second line to color red
+                    setLine2Color(mbOrders, 0x980101);
+                    mbOrders.setTextLine2("Abgebrochen");
+                    break;
+                default:
+                    mbOrders.setTextLine2(status);
+                    break;
+            }
+
+            //Filters for tabs
+
+            String orderProcessing;
+            if ("Verarbeitung".equals(mbOrders.getTextLine2())) {
+                orderProcessing = order;
+                MultiButton mbOrderProcessing = new MultiButton(orderProcessing);
+                setLine2Color(mbOrderProcessing, 0xE7E04C);
+                mbOrderProcessing.setTextLine2("Verarbeitung");
+                conOrdersProcessing.setUIID("conOrdersCompleted");
+                conOrdersProcessing.setScrollableY(true);
+                conOrdersProcessing.add(mbOrderProcessing);
+            }
+
+            conOrders.add(mbOrders);
         }
-
-        this.add(conOrders);
-
+        //Tabs for filter
+        //TODO: Do we need a tab with completed orders?
+        Tabs t = new Tabs();
+        Style s = UIManager.getInstance().getComponentStyle("Tab");
+        FontImage icon1 = FontImage.createMaterial(FontImage.MATERIAL_QUESTION_ANSWER, s);
+        t.addTab("Alle", icon1, conOrders);
+        //t.addTab("Abgeschlossen", icon1, conOrdersCompleted);
+        t.addTab("Verarbeitung", icon1, conOrdersProcessing);
+        this.add(t);
         initGuiBuilderComponents(resourceObjectInstance);
 
     }
@@ -93,10 +132,21 @@ public class BestellungenForm extends com.codename1.ui.Form {
     private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance) {
         setLayout(new com.codename1.ui.layouts.LayeredLayout());
         setInlineStylesTheme(resourceObjectInstance);
+        setScrollableY(true);
                 setInlineStylesTheme(resourceObjectInstance);
         setTitle("BestellungenForm");
         setName("BestellungenForm");
     }// </editor-fold>
 
 //-- DON'T EDIT ABOVE THIS LINE!!!
+    //Set the colors of Multibutton Line2
+    private void setLine2Color(MultiButton multiButton, int color) {
+        List<Component> childsLevel1 = multiButton.getChildrenAsList(false);
+        Container firstContainerLevel1 = (Container) childsLevel1.get(0);
+        List<Component> childsLevel2 = firstContainerLevel1.getChildrenAsList(false);
+        Container targetContainerLevel2 = (Container) childsLevel2.get(multiButton.isHorizontalLayout() ? 2 : 0);
+        List<Component> childsLevel3 = targetContainerLevel2.getChildrenAsList(false);
+        Label firstLabelLevel3 = (Label) childsLevel3.get(0);
+        firstLabelLevel3.getAllStyles().setFgColor(color);
+    }
 }
