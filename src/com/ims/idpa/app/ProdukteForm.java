@@ -91,9 +91,12 @@ public class ProdukteForm extends com.codename1.ui.Form {
                         break;
                 }
                 conProducts.add(mbProducts);
-
-                initGuiBuilderComponents(resourceObjectInstance);
             }
+            
+            this.add(conProducts);
+            
+            initGuiBuilderComponents(resourceObjectInstance);
+            
         } catch (JSONException ex) {
 
         }
