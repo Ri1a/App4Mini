@@ -20,6 +20,7 @@ public class Bestellungen {
     
     private String orderNames;
     private String orderStatus;
+    
     ArrayList<String> ordersArr = new ArrayList<>();
     ArrayList<String> ordersStatusArr = new ArrayList<>();
 
@@ -39,8 +40,10 @@ public class Bestellungen {
             ArrayList<Map<String, String>> myList = (ArrayList<Map<String, String>>) result.get("root");
             for (int i = 0; i < myList.size(); i++) {
                 Map<String, String> dtls = myList.get(i);
+                //Get "name"
                 orderNames = dtls.get("date_created");
                 ordersArr.add(orderNames);
+                //Get Status
                 orderStatus = dtls.get("status");
                 ordersStatusArr.add(orderStatus);
 

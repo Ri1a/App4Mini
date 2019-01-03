@@ -5,9 +5,9 @@
  */
 package com.ims.idpa.app;
 
-import ca.weblite.codename1.json.JSONException;
 import com.codename1.components.MultiButton;
 import com.codename1.io.Preferences;
+import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
@@ -31,6 +31,8 @@ import java.util.List;
 public class BestellungenForm extends com.codename1.ui.Form {
 
     Bestellungen bestellungen = new Bestellungen();
+    String order;
+    MultiButton mbOrders = new MultiButton();
 
     Container conOrdersCompleted = new Container(BoxLayout.y());
     Container conOrdersProcessing = new Container(BoxLayout.y());
@@ -43,6 +45,7 @@ public class BestellungenForm extends com.codename1.ui.Form {
 
         IndexForm indexForm = new IndexForm();
         ProdukteForm produkteForm = new ProdukteForm();
+        
         //Menu
         Toolbar tb = this.getToolbar();
         Container topBar = BorderLayout.east(new Label(""));
@@ -62,19 +65,21 @@ public class BestellungenForm extends com.codename1.ui.Form {
             Preferences.clearAll();
             new LoginForm().show();
         });
-        //Bestellungen bestellungen = new Bestellungen();
+        
         bestellungen.getOrders();
+        
         //Show orders in app
         Container conOrders = new Container(BoxLayout.y());
         conOrders.setUIID("conOrders");
         conOrders.setScrollableY(true);
+        
         //Get elements from array
         for (int i = 0; i < bestellungen.getOrdersArr().size(); i++) {
-            String order = bestellungen.getOrdersArr().get(i);
             String status = bestellungen.getOrdersStatusArr().get(i);
+            order = bestellungen.getOrdersArr().get(i);
 
             //All orders
-            MultiButton mbOrders = new MultiButton(order);
+            mbOrders = new MultiButton(order);
 
             switch (status) {
                 case "completed":
@@ -98,7 +103,6 @@ public class BestellungenForm extends com.codename1.ui.Form {
             }
 
             //Filters for tabs
-
             String orderProcessing;
             if ("Verarbeitung".equals(mbOrders.getTextLine2())) {
                 orderProcessing = order;
@@ -108,10 +112,20 @@ public class BestellungenForm extends com.codename1.ui.Form {
                 conOrdersProcessing.setUIID("conOrdersCompleted");
                 conOrdersProcessing.setScrollableY(true);
                 conOrdersProcessing.add(mbOrderProcessing);
+
+                //Show Orderdetails
+                mbOrderProcessing.addActionListener(e -> {
+                    bestellungDetailForm();
+                });
             }
+            //Show Orderdetails
+            mbOrders.addActionListener(e -> {
+                bestellungDetailForm();
+            });
 
             conOrders.add(mbOrders);
         }
+
         //Tabs for filter
         //TODO: Do we need a tab with completed orders?
         Tabs t = new Tabs();
@@ -148,5 +162,25 @@ public class BestellungenForm extends com.codename1.ui.Form {
         List<Component> childsLevel3 = targetContainerLevel2.getChildrenAsList(false);
         Label firstLabelLevel3 = (Label) childsLevel3.get(0);
         firstLabelLevel3.getAllStyles().setFgColor(color);
+    }
+
+    public void bestellungDetailForm() {
+
+        BestellungDetailForm bestellungDetailForm = new BestellungDetailForm();
+
+        //Backbutton
+        Button btnBack = new Button("Zurück");
+        //TODO set Buttonsize
+        //btnBack.setSize(d);
+        btnBack.addActionListener(b -> {
+            new BestellungenForm().show();
+        });
+
+        //Orderdetails
+        Container conBestellungDetail = new Container(BoxLayout.y());
+        conBestellungDetail.add(btnBack);
+        bestellungDetailForm.add(conBestellungDetail);
+        bestellungDetailForm.show();
+
     }
 }
