@@ -3,6 +3,7 @@ package com.ims.idpa.app;
 import ca.weblite.codename1.json.JSONException;
 import com.codename1.components.MultiButton;
 import com.codename1.io.Preferences;
+import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
@@ -90,13 +91,37 @@ public class ProdukteForm extends com.codename1.ui.Form {
                         mbProducts.setTextLine2(stock);
                         break;
                 }
+
+                //Bestellungen in Detail (Form)
+                ProdukteDetailForm produkteDetailForm = new ProdukteDetailForm();
+                //Backbutton
+                Button btnBack = new Button("Zurück");
+                Label lblProductName = new Label(product);
+                Label lblProductStock = new Label(stock);
+                btnBack.addActionListener(b -> {
+                    new ProdukteForm().show();
+                });
+                //Orderdetails
+                Container conProdukteDetail = new Container(BoxLayout.y());
+                conProdukteDetail.add(btnBack);
+                conProdukteDetail.add(new Label("Name:"));
+                conProdukteDetail.add(lblProductName);
+                conProdukteDetail.add(new Label("Status:"));
+                conProdukteDetail.add(lblProductStock);
+                produkteDetailForm.add(conProdukteDetail);
+
+                //Show Orderdetails (all orders)
+                mbProducts.addActionListener(e -> {
+                    produkteDetailForm.show();
+                });
+
                 conProducts.add(mbProducts);
             }
-            
+
             this.add(conProducts);
-            
+
             initGuiBuilderComponents(resourceObjectInstance);
-            
+
         } catch (JSONException ex) {
 
         }

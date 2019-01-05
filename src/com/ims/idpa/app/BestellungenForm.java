@@ -32,6 +32,7 @@ public class BestellungenForm extends com.codename1.ui.Form {
 
     Bestellungen bestellungen = new Bestellungen();
     String order;
+    String detailOrder;
     MultiButton mbOrders = new MultiButton();
 
     Container conOrdersCompleted = new Container(BoxLayout.y());
@@ -45,7 +46,7 @@ public class BestellungenForm extends com.codename1.ui.Form {
 
         IndexForm indexForm = new IndexForm();
         ProdukteForm produkteForm = new ProdukteForm();
-        
+
         //Menu
         Toolbar tb = this.getToolbar();
         Container topBar = BorderLayout.east(new Label(""));
@@ -65,14 +66,14 @@ public class BestellungenForm extends com.codename1.ui.Form {
             Preferences.clearAll();
             new LoginForm().show();
         });
-        
+
         bestellungen.getOrders();
-        
+
         //Show orders in app
         Container conOrders = new Container(BoxLayout.y());
         conOrders.setUIID("conOrders");
         conOrders.setScrollableY(true);
-        
+
         //Get elements from array
         for (int i = 0; i < bestellungen.getOrdersArr().size(); i++) {
             String status = bestellungen.getOrdersStatusArr().get(i);
@@ -102,6 +103,24 @@ public class BestellungenForm extends com.codename1.ui.Form {
                     break;
             }
 
+            //Bestellungen in Detail (Form)
+            BestellungDetailForm bestellungDetailForm = new BestellungDetailForm();
+            //Backbutton
+            Button btnBack = new Button("Zurück");
+            Label lblOrderName = new Label(order);
+            Label lblOrderStatus = new Label(status);
+            btnBack.addActionListener(b -> {
+                new BestellungenForm().show();
+            });
+            //Orderdetails
+            Container conBestellungDetail = new Container(BoxLayout.y());
+            conBestellungDetail.add(btnBack);
+            conBestellungDetail.add(new Label("Name:"));
+            conBestellungDetail.add(lblOrderName);
+            conBestellungDetail.add(new Label("Status:"));
+            conBestellungDetail.add(lblOrderStatus);
+            bestellungDetailForm.add(conBestellungDetail);
+
             //Filters for tabs
             String orderProcessing;
             if ("Verarbeitung".equals(mbOrders.getTextLine2())) {
@@ -113,26 +132,28 @@ public class BestellungenForm extends com.codename1.ui.Form {
                 conOrdersProcessing.setScrollableY(true);
                 conOrdersProcessing.add(mbOrderProcessing);
 
-                //Show Orderdetails
+                //Show Orderdetails (processing orders)
                 mbOrderProcessing.addActionListener(e -> {
-                    bestellungDetailForm();
+                    bestellungDetailForm.show();
                 });
             }
-            //Show Orderdetails
+
+            //Show Orderdetails (all orders)
             mbOrders.addActionListener(e -> {
-                bestellungDetailForm();
+                bestellungDetailForm.show();
             });
 
             conOrders.add(mbOrders);
+
         }
 
         //Tabs for filter
-        //TODO: Do we need a tab with completed orders?
         Tabs t = new Tabs();
         Style s = UIManager.getInstance().getComponentStyle("Tab");
         FontImage icon1 = FontImage.createMaterial(FontImage.MATERIAL_QUESTION_ANSWER, s);
         t.addTab("Alle", icon1, conOrders);
-        //t.addTab("Abgeschlossen", icon1, conOrdersCompleted);
+        //TODO: Change background of tabs
+        conOrdersProcessing.setUIID("Tab1Background");
         t.addTab("Verarbeitung", icon1, conOrdersProcessing);
         this.add(t);
         initGuiBuilderComponents(resourceObjectInstance);
@@ -164,23 +185,8 @@ public class BestellungenForm extends com.codename1.ui.Form {
         firstLabelLevel3.getAllStyles().setFgColor(color);
     }
 
-    public void bestellungDetailForm() {
-
-        BestellungDetailForm bestellungDetailForm = new BestellungDetailForm();
-
-        //Backbutton
-        Button btnBack = new Button("Zurück");
-        //TODO set Buttonsize
-        //btnBack.setSize(d);
-        btnBack.addActionListener(b -> {
-            new BestellungenForm().show();
-        });
-
-        //Orderdetails
-        Container conBestellungDetail = new Container(BoxLayout.y());
-        conBestellungDetail.add(btnBack);
-        bestellungDetailForm.add(conBestellungDetail);
-        bestellungDetailForm.show();
-
+    public String getDetailOrder() {
+        return detailOrder;
     }
+
 }
