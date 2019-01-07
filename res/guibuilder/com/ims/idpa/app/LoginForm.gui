@@ -1,16 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <component type="Form" layout="LayeredLayout" layeredLayoutPreferredWidthMM="0.0" layeredLayoutPreferredHeightMM="0.0"  autolayout="true" title="LoginForm" scrollableY="true" name="LoginForm">
-  <component type="TextField" text="Shopname" name="txtShop">
-    <layoutConstraint insets="14.246947% 30.801105% auto auto" referenceComponents="-1 -1 -1 -1" referencePositions="0.0 0.0 0.0 0.0" />
-  </component>
-  <component type="TextField" text="Consumer Key" name="txtCK">
-    <layoutConstraint insets="2.3809528mm 49.202732% auto 1.8518524mm" referenceComponents="0 -1 -1 0 " referencePositions="1.0 0.0 0.0 0.0" />
-  </component>
-  <component type="TextField" text="Secret Key" name="txtSK">
-    <layoutConstraint insets="9.166667% 50.0% auto 0.0mm" referenceComponents="0 -1 -1 1 " referencePositions="1.0 0.0 0.0 0.0" />
-  </component>
-  <component type="Button" text="Log In" preferredSize="34.391533mm 9.78836mm" name="Start" actionEvent="true">
-    <layoutConstraint insets="26.366467% auto auto 0.0mm" referenceComponents="2 -1 -1 -1" referencePositions="1.0 0.0 0.0 0.0" />
-  </component>
 </component>

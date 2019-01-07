@@ -43,6 +43,9 @@ public class BestellungenForm extends com.codename1.ui.Form {
     }
 
     public BestellungenForm(com.codename1.ui.util.Resources resourceObjectInstance) {
+        
+        //Change name of form
+        //this.getTitleComponent().setText("Bestellungen");
 
         IndexForm indexForm = new IndexForm();
         ProdukteForm produkteForm = new ProdukteForm();
