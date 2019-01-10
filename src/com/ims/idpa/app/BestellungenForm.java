@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ims.idpa.app;
 
 import com.codename1.components.MultiButton;
@@ -43,13 +38,9 @@ public class BestellungenForm extends com.codename1.ui.Form {
     }
 
     public BestellungenForm(com.codename1.ui.util.Resources resourceObjectInstance) {
-        
-        //Change name of form
-        //this.getTitleComponent().setText("Bestellungen");
 
         IndexForm indexForm = new IndexForm();
         ProdukteForm produkteForm = new ProdukteForm();
-
         //Menu
         Toolbar tb = this.getToolbar();
         Container topBar = BorderLayout.east(new Label(""));
@@ -93,13 +84,16 @@ public class BestellungenForm extends com.codename1.ui.Form {
                     break;
                 case "processing":
                     //Change the second line to color yellow
-                    setLine2Color(mbOrders, 0xE7E04C);
+                    setLine2Color(mbOrders, 0xCCCC00);
                     mbOrders.setTextLine2("Verarbeitung");
                     break;
                 case "cancelled":
                     //Change the second line to color red
                     setLine2Color(mbOrders, 0x980101);
                     mbOrders.setTextLine2("Abgebrochen");
+                    break;
+                case "on-hold":
+                    mbOrders.setTextLine2("In Wartestellung");
                     break;
                 default:
                     mbOrders.setTextLine2(status);
@@ -121,6 +115,20 @@ public class BestellungenForm extends com.codename1.ui.Form {
             conBestellungDetail.add(new Label("Name:"));
             conBestellungDetail.add(lblOrderName);
             conBestellungDetail.add(new Label("Status:"));
+            switch (status) {
+                case "completed":
+                    lblOrderStatus.setText("Abgeschlossen");
+                    break;
+                case "processing":
+                    lblOrderStatus.setText("Verarbeitung");
+                    break;
+                case "cancelled":
+                    lblOrderStatus.setText("Abgebrochen");
+                    break;
+                case "on-hold":
+                    lblOrderStatus.setText("In Wartestellung");
+                    break;
+            }
             conBestellungDetail.add(lblOrderStatus);
             bestellungDetailForm.add(conBestellungDetail);
 
@@ -129,7 +137,7 @@ public class BestellungenForm extends com.codename1.ui.Form {
             if ("Verarbeitung".equals(mbOrders.getTextLine2())) {
                 orderProcessing = order;
                 MultiButton mbOrderProcessing = new MultiButton(orderProcessing);
-                setLine2Color(mbOrderProcessing, 0xE7E04C);
+                setLine2Color(mbOrderProcessing, 0xCCCC00);
                 mbOrderProcessing.setTextLine2("Verarbeitung");
                 conOrdersProcessing.setUIID("conOrdersCompleted");
                 conOrdersProcessing.setScrollableY(true);
@@ -140,14 +148,11 @@ public class BestellungenForm extends com.codename1.ui.Form {
                     bestellungDetailForm.show();
                 });
             }
-
             //Show Orderdetails (all orders)
             mbOrders.addActionListener(e -> {
                 bestellungDetailForm.show();
             });
-
             conOrders.add(mbOrders);
-
         }
 
         //Tabs for filter
@@ -160,7 +165,6 @@ public class BestellungenForm extends com.codename1.ui.Form {
         t.addTab("Verarbeitung", icon1, conOrdersProcessing);
         this.add(t);
         initGuiBuilderComponents(resourceObjectInstance);
-
     }
 
 //-- DON'T EDIT BELOW THIS LINE!!!

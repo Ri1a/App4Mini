@@ -20,15 +20,11 @@ public class Main {
     public void init(Object context) {
         // use two network threads instead of one
         updateNetworkThreadCount(2);
-
         theme = UIManager.initFirstTheme("/theme");
-
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
-
         // Pro only feature
         Log.bindCrashProtection(true);
-
         addNetworkErrorListener(err -> {
             // prevent the event from propagating
             err.consume();

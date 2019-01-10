@@ -25,8 +25,8 @@ public class Bestellungen {
     ArrayList<String> ordersStatusArr = new ArrayList<>();
 
     public void getOrders() {
-        LoginForm loginForm = new LoginForm();
         
+        LoginForm loginForm = new LoginForm();
         WelcomeForm tokens = new WelcomeForm();
 
         try {
@@ -46,7 +46,6 @@ public class Bestellungen {
                 //Get Status
                 orderStatus = dtls.get("status");
                 ordersStatusArr.add(orderStatus);
-
             }
 
         } catch (IOException err) {

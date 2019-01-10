@@ -3,9 +3,8 @@ package com.ims.idpa.app;
 import com.codename1.io.Preferences;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
-import com.codename1.ui.TextArea;
+import com.codename1.ui.Label;
 import com.codename1.ui.TextComponent;
-import com.codename1.ui.TextField;
 import com.codename1.ui.layouts.BoxLayout;
 
 /**
@@ -27,30 +26,27 @@ public class LoginForm extends com.codename1.ui.Form {
 
     public LoginForm(com.codename1.ui.util.Resources resourceObjectInstance) {
 
-        IndexForm indexForm = new IndexForm();
-
         Container conLogin = new Container(BoxLayout.y());
         TextComponent gui_txtShop = new TextComponent().label("Shop:");
         TextComponent gui_txtCK = new TextComponent().label("Consumer Key:");
         TextComponent gui_txtSK = new TextComponent().label("Secret Key:");
-
         Button btnLogin = new Button("Login");
         btnLogin.addActionListener(e -> {
 
-            shop_name = gui_txtShop.getText();
-            consumer_key = gui_txtCK.getText();
-            secret_key = gui_txtSK.getText();
-
-            if (shop_name == null || consumer_key == null || secret_key == null) {
+            if (gui_txtShop.getText().isEmpty() || gui_txtCK.getText().isEmpty() || gui_txtSK.getText().isEmpty()) {
                 this.show();
+                Label lblError = new Label("Bitte geben Sie Ihre Daten ein");
+                lblError.getStyle().setFgColor(0xFF0000);
             } else {
 
-                //Using the Preferences API
-                //Preferences.clearAll();
+                shop_name = gui_txtShop.getText();
+                consumer_key = gui_txtCK.getText();
+                secret_key = gui_txtSK.getText();
+                
                 Preferences.set("shop_name", shop_name);
                 Preferences.set("consumer_key", consumer_key);
                 Preferences.set("secret_key", secret_key);
-
+                
                 indexForm.show();
             }
         });
@@ -79,22 +75,4 @@ public class LoginForm extends com.codename1.ui.Form {
     }// </editor-fold>
 
 //-- DON'T EDIT ABOVE THIS LINE!!!
-//    public void onStartActionEvent(com.codename1.ui.events.ActionEvent ev) {
-//
-////        LoginForm loginForm = new LoginForm();
-//        // IndexForm indexForm = new IndexForm();
-//        if (shop_name == null || consumer_key == null || secret_key == null) {
-//            this.show();
-//        } else {
-//
-//            //Using the Preferences API
-//            //Preferences.clearAll();
-//            Preferences.set("shop_name", shop_name);
-//            Preferences.set("consumer_key", consumer_key);
-//            Preferences.set("secret_key", secret_key);
-//
-//            indexForm.show();
-//
-//        }
-//    }
 }

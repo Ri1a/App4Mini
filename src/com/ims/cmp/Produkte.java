@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ims.cmp;
 
 import ca.weblite.codename1.json.JSONException;
@@ -28,8 +23,8 @@ public class Produkte {
     ArrayList<String> productStock = new ArrayList<>();
 
     public void getProdukte() throws JSONException {
-        LoginForm loginForm = new LoginForm();
 
+        LoginForm loginForm = new LoginForm();
         WelcomeForm tokens = new WelcomeForm();
 
         try {
@@ -42,22 +37,18 @@ public class Produkte {
             //JSON Filter     
             ArrayList<Map<String, String>> myList = (ArrayList<Map<String, String>>) result.get("root");
             for (int i = 0; i < myList.size(); i++) {
-
+                
                 Map<String, String> dtls = myList.get(i);
                 //Get name, image, stock
                 productsArr.add(dtls.get("name"));
                 productImages.add(dtls.get("images"));
                 productStock.add(dtls.get("stock_status"));
                 //TODO: Filter out image-source
-
             }
-            //For testing -> delete after
-            //System.out.println(productImages);
-
+            
         } catch (IOException err) {
             loginForm.show();
         }
-
     }
 
     public ArrayList<String> getProductsArr() {

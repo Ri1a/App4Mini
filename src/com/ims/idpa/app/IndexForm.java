@@ -1,8 +1,6 @@
 package com.ims.idpa.app;
 
-import ca.weblite.codename1.json.JSONException;
 import com.codename1.io.Preferences;
-import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Label;
@@ -10,6 +8,8 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
+import com.ims.cmp.Produkte;
 
 /**
  * GUI builder created Form
@@ -17,6 +17,8 @@ import com.codename1.ui.layouts.BorderLayout;
  * @author Riccardo, Joel, Yanick, Alain
  */
 public class IndexForm extends com.codename1.ui.Form {
+    
+    Produkte productNumber = new Produkte();
 
     public IndexForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
@@ -26,7 +28,6 @@ public class IndexForm extends com.codename1.ui.Form {
         
         //TODO: Make an epic index site
         
-
         //Menu
         Toolbar tb = this.getToolbar();
         Container topBar = BorderLayout.east(new Label(""));
@@ -51,12 +52,15 @@ public class IndexForm extends com.codename1.ui.Form {
             new LoginForm().show();
         });
 
-        Label top = new Label("Willkommen, " + Preferences.get("shop_name", null));
-        top.setTextPosition(Component.TOP);
-        this.add(top);
+        Container conIndex = new Container(BoxLayout.y());
+        
+        Label lblWelcome = new Label("Willkommen, " + Preferences.get("shop_name", null));
+        
+        conIndex.add(lblWelcome);
+        this.add(conIndex);
 
         initGuiBuilderComponents(resourceObjectInstance);
-    }
+    }    
 
 //-- DON'T EDIT BELOW THIS LINE!!!
 
@@ -73,3 +77,4 @@ public class IndexForm extends com.codename1.ui.Form {
 
 //-- DON'T EDIT ABOVE THIS LINE!!!
 }
+

@@ -101,27 +101,30 @@ public class ProdukteForm extends com.codename1.ui.Form {
                 btnBack.addActionListener(b -> {
                     new ProdukteForm().show();
                 });
-                //Orderdetails
+                //ProductDetails
                 Container conProdukteDetail = new Container(BoxLayout.y());
                 conProdukteDetail.add(btnBack);
                 conProdukteDetail.add(new Label("Name:"));
                 conProdukteDetail.add(lblProductName);
                 conProdukteDetail.add(new Label("Status:"));
+                switch (stock) {
+                    case "instock":
+                        lblProductStock.setText("Auf Lager");
+                        break;
+                    case "outofstock":
+                        lblProductStock.setText("Nicht auf Lager");
+                        break;
+                }
                 conProdukteDetail.add(lblProductStock);
                 produkteDetailForm.add(conProdukteDetail);
-
-                //Show Orderdetails (all orders)
+                //Show ProductDetails (all Products)
                 mbProducts.addActionListener(e -> {
                     produkteDetailForm.show();
                 });
-
                 conProducts.add(mbProducts);
             }
-
             this.add(conProducts);
-
             initGuiBuilderComponents(resourceObjectInstance);
-
         } catch (JSONException ex) {
 
         }
@@ -133,6 +136,8 @@ public class ProdukteForm extends com.codename1.ui.Form {
     private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance) {
         setLayout(new com.codename1.ui.layouts.LayeredLayout());
         setInlineStylesTheme(resourceObjectInstance);
+        setScrollableX(true);
+        setScrollableY(true);
                 setInlineStylesTheme(resourceObjectInstance);
         setTitle("ProdukteForm");
         setName("ProdukteForm");

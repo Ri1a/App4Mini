@@ -13,9 +13,9 @@ public class WelcomeForm extends com.codename1.ui.Form {
 
     BrowserComponent browser;
 
-    private String shop_name_token;
-    private String consumer_key_token;
-    private String secret_key_token;
+    private String shop_name_token = null;
+    private String consumer_key_token = null;
+    private String secret_key_token = null;
 
     Produkte produkte = new Produkte();
 
@@ -101,12 +101,8 @@ public class WelcomeForm extends com.codename1.ui.Form {
         if (shop_name_token == null || consumer_key_token == null || secret_key_token == null) {
             loginForm.show();
         } else {
-            //For testing -> delete after
-            System.out.println("Shopname: " + shop_name_token + "\nConsumer Key: " + consumer_key_token + "\nSecret Key: " + secret_key_token);
-            
             indexForm.show();
         }
-
     }
 
     public String getShop_name_token() {
