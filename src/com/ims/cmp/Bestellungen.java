@@ -3,6 +3,7 @@ package com.ims.cmp;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkManager;
+import com.codename1.ui.Dialog;
 import com.ims.idpa.app.LoginForm;
 import com.ims.idpa.app.WelcomeForm;
 import java.io.ByteArrayInputStream;
@@ -18,11 +19,9 @@ import java.util.Map;
  */
 public class Bestellungen {
     
-    private String orderNames;
-    private String orderStatus;
-    
     ArrayList<String> ordersArr = new ArrayList<>();
     ArrayList<String> ordersStatusArr = new ArrayList<>();
+    ArrayList<String> orderTotal = new ArrayList<>();
 
     public void getOrders() {
         
@@ -40,16 +39,14 @@ public class Bestellungen {
             ArrayList<Map<String, String>> myList = (ArrayList<Map<String, String>>) result.get("root");
             for (int i = 0; i < myList.size(); i++) {
                 Map<String, String> dtls = myList.get(i);
-                //Get "name"
-                orderNames = dtls.get("date_created");
-                ordersArr.add(orderNames);
-                //Get Status
-                orderStatus = dtls.get("status");
-                ordersStatusArr.add(orderStatus);
+                ordersArr.add(dtls.get("date_created"));
+                ordersStatusArr.add(dtls.get("status"));
+                orderTotal.add(dtls.get("total"));
             }
 
-        } catch (IOException err) {
+        } catch (IOException e) {
             loginForm.show();
+            Dialog.show("Bestellungen konnten nicht angezeigt werden.", "", "OK", null);
         }
 
     }
@@ -60,6 +57,10 @@ public class Bestellungen {
 
     public ArrayList<String> getOrdersStatusArr() {
         return ordersStatusArr;
+    }
+
+    public ArrayList<String> getOrderTotal() {
+        return orderTotal;
     }
     
 

@@ -17,11 +17,13 @@ import com.ims.cmp.Produkte;
 import java.util.List;
 
 /**
- * GUI builder created Form
  *
- * @author ricky
+ * @author Riccardo, Joel, Yanick, Alain
+ * Version: 1.0.0
  */
 public class ProdukteForm extends com.codename1.ui.Form {
+
+    String productName;
 
     public ProdukteForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
@@ -29,7 +31,6 @@ public class ProdukteForm extends com.codename1.ui.Form {
 
     public ProdukteForm(com.codename1.ui.util.Resources resourceObjectInstance) {
 
-        try {
             //Menu
             Toolbar tb = this.getToolbar();
             Container topBar = BorderLayout.east(new Label(""));
@@ -37,23 +38,14 @@ public class ProdukteForm extends com.codename1.ui.Form {
             topBar.setUIID("SideCommand");
             tb.addComponentToSideMenu(topBar);
 
-            tb.addMaterialCommandToSideMenu("Home", FontImage.MATERIAL_HOME, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent evt) {
+            tb.addMaterialCommandToSideMenu("Home", FontImage.MATERIAL_HOME, (ActionListener) (ActionEvent evt) ->  {
                     new IndexForm().show();
-                }
             });
-            tb.addMaterialCommandToSideMenu("Produkte", FontImage.MATERIAL_WEB, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent evt) {
+            tb.addMaterialCommandToSideMenu("Produkte", FontImage.MATERIAL_WEB, (ActionListener) (ActionEvent evt) ->  {
                     new ProdukteForm().show();
-                }
             });
-            tb.addMaterialCommandToSideMenu("Bestellungen", FontImage.MATERIAL_SHOPPING_CART, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent evt) {
+            tb.addMaterialCommandToSideMenu("Bestellungen", FontImage.MATERIAL_SHOPPING_CART, (ActionListener) (ActionEvent evt) ->   {
                     new BestellungenForm().show();
-                }
             });
             tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_POWER_SETTINGS_NEW, (ActionListener) (ActionEvent evt) -> {
                 Preferences.clearAll();
@@ -61,17 +53,22 @@ public class ProdukteForm extends com.codename1.ui.Form {
             });
 
             Produkte produkte = new Produkte();
+        try {
             produkte.getProdukte();
+        } catch (JSONException ex) {
+        }
 
             //Show products in app
-            Container conProducts = new Container(BoxLayout.y());
-            conProducts.setUIID("conProducts");
+            //TODO: Scrolling not working
+            Container conProducts = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             conProducts.setScrollableY(true);
+            conProducts.setUIID("conProducts");
 
             //Get elements from array
             for (int i = 0; i < produkte.getProductsArr().size(); i++) {
                 String product = produkte.getProductsArr().get(i);
                 String stock = produkte.getProductStock().get(i);
+                String dateCreated = produkte.getProductDateCreated().get(i);
 
                 //All orders
                 MultiButton mbProducts = new MultiButton(product);
@@ -92,30 +89,28 @@ public class ProdukteForm extends com.codename1.ui.Form {
                         break;
                 }
 
-                //Bestellungen in Detail (Form)
+                //Produkte in Detail (Form)
                 ProdukteDetailForm produkteDetailForm = new ProdukteDetailForm();
                 //Backbutton
                 Button btnBack = new Button("Zurück");
-                Label lblProductName = new Label(product);
-                Label lblProductStock = new Label(stock);
                 btnBack.addActionListener(b -> {
                     new ProdukteForm().show();
                 });
+
                 //ProductDetails
                 Container conProdukteDetail = new Container(BoxLayout.y());
                 conProdukteDetail.add(btnBack);
-                conProdukteDetail.add(new Label("Name:"));
-                conProdukteDetail.add(lblProductName);
-                conProdukteDetail.add(new Label("Status:"));
+                conProdukteDetail.add(new Label("Name: " + product));
                 switch (stock) {
                     case "instock":
-                        lblProductStock.setText("Auf Lager");
+                        stock = "Auf Lager";
                         break;
                     case "outofstock":
-                        lblProductStock.setText("Nicht auf Lager");
+                        stock = "Nicht auf Lager";
                         break;
                 }
-                conProdukteDetail.add(lblProductStock);
+                conProdukteDetail.add(new Label("Status: " + stock));
+                conProdukteDetail.add(new Label("Erstellt am: " + dateCreated));
                 produkteDetailForm.add(conProdukteDetail);
                 //Show ProductDetails (all Products)
                 mbProducts.addActionListener(e -> {
@@ -125,9 +120,7 @@ public class ProdukteForm extends com.codename1.ui.Form {
             }
             this.add(conProducts);
             initGuiBuilderComponents(resourceObjectInstance);
-        } catch (JSONException ex) {
-
-        }
+        
     }
     //-- DON'T EDIT BELOW THIS LINE!!!
 
@@ -139,13 +132,14 @@ public class ProdukteForm extends com.codename1.ui.Form {
         setScrollableX(true);
         setScrollableY(true);
                 setInlineStylesTheme(resourceObjectInstance);
-        setTitle("ProdukteForm");
+        setTitle("Produkte");
         setName("ProdukteForm");
     }// </editor-fold>
 
 //-- DON'T EDIT ABOVE THIS LINE!!!
     //Set the colors of Multibutton Line2
     private void setLine2Color(MultiButton multiButton, int color) {
+
         List<Component> childsLevel1 = multiButton.getChildrenAsList(false);
         Container firstContainerLevel1 = (Container) childsLevel1.get(0);
         List<Component> childsLevel2 = firstContainerLevel1.getChildrenAsList(false);

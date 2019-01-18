@@ -1,3 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<component type="Form" layout="LayeredLayout" title="ProdukteDetailForm" name="ProdukteDetailForm" autoLayout="true"></component>
+<component type="Form" layout="LayeredLayout" title="Produktdetails" name="ProdukteDetailForm" autoLayout="true"></component>

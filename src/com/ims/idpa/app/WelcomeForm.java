@@ -5,9 +5,9 @@ import com.codename1.io.Preferences;
 import com.codename1.ui.BrowserComponent;
 
 /**
- * GUI builder created Form
  *
  * @author Riccardo, Joel, Yanick, Alain
+ * Version: 1.0.0
  */
 public class WelcomeForm extends com.codename1.ui.Form {
 
@@ -69,7 +69,7 @@ public class WelcomeForm extends com.codename1.ui.Form {
         setScrollableY(true);
                 setInlineStylesTheme(resourceObjectInstance);
         setInlineAllStyles("alignment:center;");
-        setTitle("WelcomeForm");
+        setTitle("");
         setName("WelcomeForm");
         addComponent(gui_lblWelcome);
         addComponent(gui_Button);

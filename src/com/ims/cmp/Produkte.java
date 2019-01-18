@@ -4,6 +4,7 @@ import ca.weblite.codename1.json.JSONException;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkManager;
+import com.codename1.ui.Dialog;
 import com.ims.idpa.app.LoginForm;
 import com.ims.idpa.app.WelcomeForm;
 import java.io.ByteArrayInputStream;
@@ -15,12 +16,14 @@ import java.util.Map;
 /**
  *
  * @author Riccardo, Joel, Yanick, Alain
+ * Version: 1.0.0
  */
 public class Produkte {
 
     ArrayList<String> productsArr = new ArrayList<>();
     ArrayList<String> productImages = new ArrayList<>();
     ArrayList<String> productStock = new ArrayList<>();
+    ArrayList<String> productDateCreated = new ArrayList<>();
 
     public void getProdukte() throws JSONException {
 
@@ -39,15 +42,16 @@ public class Produkte {
             for (int i = 0; i < myList.size(); i++) {
                 
                 Map<String, String> dtls = myList.get(i);
-                //Get name, image, stock
                 productsArr.add(dtls.get("name"));
                 productImages.add(dtls.get("images"));
                 productStock.add(dtls.get("stock_status"));
+                productDateCreated.add(dtls.get("date_created"));
                 //TODO: Filter out image-source
             }
             
-        } catch (IOException err) {
+        } catch (IOException e) {
             loginForm.show();
+            Dialog.show("Produkte konnten nicht angezeigt werden.", "", "OK", null);
         }
     }
 
@@ -62,5 +66,9 @@ public class Produkte {
     public ArrayList<String> getProductStock() {
         return productStock;
     }
-
+    
+    public ArrayList<String> getProductDateCreated() {
+        return productDateCreated;
+    }
+    
 }

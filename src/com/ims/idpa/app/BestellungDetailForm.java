@@ -1,9 +1,9 @@
 package com.ims.idpa.app;
 
 /**
- * GUI builder created Form
  *
- * @author ricky
+ * @author Riccardo, Joel, Yanick, Alain
+ * Version: 1.0.0
  */
 public class BestellungDetailForm extends com.codename1.ui.Form {
 
@@ -23,7 +23,7 @@ public class BestellungDetailForm extends com.codename1.ui.Form {
         setLayout(new com.codename1.ui.layouts.LayeredLayout());
         setInlineStylesTheme(resourceObjectInstance);
                 setInlineStylesTheme(resourceObjectInstance);
-        setTitle("BestellungDetailForm");
+        setTitle("Bestellungdetails");
         setName("BestellungDetailForm");
     }// </editor-fold>
 

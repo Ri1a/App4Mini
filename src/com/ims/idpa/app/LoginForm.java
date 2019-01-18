@@ -3,14 +3,14 @@ package com.ims.idpa.app;
 import com.codename1.io.Preferences;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
-import com.codename1.ui.Label;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.TextComponent;
 import com.codename1.ui.layouts.BoxLayout;
 
 /**
- * GUI builder created Form
  *
  * @author Riccardo, Joel, Yanick, Alain
+ * Version: 1.0.0
  */
 public class LoginForm extends com.codename1.ui.Form {
 
@@ -35,8 +35,7 @@ public class LoginForm extends com.codename1.ui.Form {
 
             if (gui_txtShop.getText().isEmpty() || gui_txtCK.getText().isEmpty() || gui_txtSK.getText().isEmpty()) {
                 this.show();
-                Label lblError = new Label("Bitte geben Sie Ihre Daten ein");
-                lblError.getStyle().setFgColor(0xFF0000);
+                Dialog.show("Eingabe ungültig", "Ihre Eingabe ist leider ungültig", "OK", null);
             } else {
 
                 shop_name = gui_txtShop.getText();
@@ -70,7 +69,7 @@ public class LoginForm extends com.codename1.ui.Form {
         setInlineStylesTheme(resourceObjectInstance);
         setScrollableY(true);
                 setInlineStylesTheme(resourceObjectInstance);
-        setTitle("LoginForm");
+        setTitle("Login");
         setName("LoginForm");
     }// </editor-fold>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<component type="Form" layout="LayeredLayout" layeredLayoutPreferredWidthMM="0.0" layeredLayoutPreferredHeightMM="0.0"  autolayout="true" styles="alignment:center;" title="WelcomeForm" scrollableY="true" name="WelcomeForm">
+<component type="Form" layout="LayeredLayout" layeredLayoutPreferredWidthMM="0.0" layeredLayoutPreferredHeightMM="0.0"  autolayout="true" styles="alignment:center;" title="" scrollableY="true" name="WelcomeForm">
   <component type="Label" text="Willkommen" styles="font:8.0mm; alignment:center;" preferredSize="135.44974mm 19.57672mm" name="lblWelcome">
     <layoutConstraint insets="11.987861% auto auto auto" referenceComponents="-1 -1 -1 1 " referencePositions="0.0 0.0 0.0 0.0" />
   </component>

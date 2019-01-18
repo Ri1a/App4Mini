@@ -19,9 +19,9 @@ import com.ims.cmp.Bestellungen;
 import java.util.List;
 
 /**
- * GUI builder created Form
  *
- * @author ricky
+ * @author Riccardo, Joel, Yanick, Alain
+ * Version: 1.0.0
  */
 public class BestellungenForm extends com.codename1.ui.Form {
 
@@ -64,14 +64,16 @@ public class BestellungenForm extends com.codename1.ui.Form {
         bestellungen.getOrders();
 
         //Show orders in app
-        Container conOrders = new Container(BoxLayout.y());
-        conOrders.setUIID("conOrders");
+        //TODO: Scrolling not working
+        Container conOrders = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         conOrders.setScrollableY(true);
+        conOrders.setUIID("conOrders");
 
         //Get elements from array
         for (int i = 0; i < bestellungen.getOrdersArr().size(); i++) {
-            String status = bestellungen.getOrdersStatusArr().get(i);
             order = bestellungen.getOrdersArr().get(i);
+            String status = bestellungen.getOrdersStatusArr().get(i);
+            String total = bestellungen.getOrderTotal().get(i);
 
             //All orders
             mbOrders = new MultiButton(order);
@@ -100,7 +102,7 @@ public class BestellungenForm extends com.codename1.ui.Form {
                     break;
             }
 
-            //Bestellungen in Detail (Form)
+            //BestellungDetails (Form)
             BestellungDetailForm bestellungDetailForm = new BestellungDetailForm();
             //Backbutton
             Button btnBack = new Button("Zurück");
@@ -111,8 +113,9 @@ public class BestellungenForm extends com.codename1.ui.Form {
             });
             //Orderdetails
             Container conBestellungDetail = new Container(BoxLayout.y());
+            conBestellungDetail.setScrollableY(true);
             conBestellungDetail.add(btnBack);
-            conBestellungDetail.add(new Label("Name:"));
+            conBestellungDetail.add(new Label("Bestellnr.:"));
             conBestellungDetail.add(lblOrderName);
             conBestellungDetail.add(new Label("Status:"));
             switch (status) {
@@ -130,6 +133,8 @@ public class BestellungenForm extends com.codename1.ui.Form {
                     break;
             }
             conBestellungDetail.add(lblOrderStatus);
+            conBestellungDetail.add("Summe: ");
+            conBestellungDetail.add(total);
             bestellungDetailForm.add(conBestellungDetail);
 
             //Filters for tabs
@@ -160,7 +165,6 @@ public class BestellungenForm extends com.codename1.ui.Form {
         Style s = UIManager.getInstance().getComponentStyle("Tab");
         FontImage icon1 = FontImage.createMaterial(FontImage.MATERIAL_QUESTION_ANSWER, s);
         t.addTab("Alle", icon1, conOrders);
-        //TODO: Change background of tabs
         conOrdersProcessing.setUIID("Tab1Background");
         t.addTab("Verarbeitung", icon1, conOrdersProcessing);
         this.add(t);
@@ -176,7 +180,7 @@ public class BestellungenForm extends com.codename1.ui.Form {
         setInlineStylesTheme(resourceObjectInstance);
         setScrollableY(true);
                 setInlineStylesTheme(resourceObjectInstance);
-        setTitle("BestellungenForm");
+        setTitle("Bestellungen");
         setName("BestellungenForm");
     }// </editor-fold>
 
