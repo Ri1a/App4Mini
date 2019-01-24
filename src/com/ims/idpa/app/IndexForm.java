@@ -2,7 +2,6 @@ package com.ims.idpa.app;
 
 import com.codename1.components.SpanLabel;
 import com.codename1.io.Preferences;
-import com.codename1.io.Util;
 import com.codename1.messaging.Message;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
@@ -38,7 +37,6 @@ public class IndexForm extends com.codename1.ui.Form {
 
     public IndexForm(com.codename1.ui.util.Resources resourceObjectInstance) {
 
-        //TODO: Make an epic index site / Add more content
         //Menu
         Toolbar tb = this.getToolbar();
         Container topBar = BorderLayout.east(new Label(""));
