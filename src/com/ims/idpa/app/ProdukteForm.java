@@ -60,7 +60,8 @@ public class ProdukteForm extends com.codename1.ui.Form {
 
         //Show products in app
         //TODO: Scrolling not working
-        Container conProducts = new Container(BoxLayout.y());
+        Container conProducts = new Container(new BorderLayout());
+        Container conBorder = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         conProducts.setScrollableY(true);
         conProducts.setUIID("conProducts");
 
@@ -100,7 +101,7 @@ public class ProdukteForm extends com.codename1.ui.Form {
             });
 
             //ProductDetails
-            Container conProdukteDetail = new Container(BoxLayout.y());
+            Container conProdukteDetail = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             conProdukteDetail.add(btnBack);
             conProdukteDetail.add(new Label("Name: " + product));
             switch (stock) {
@@ -118,8 +119,9 @@ public class ProdukteForm extends com.codename1.ui.Form {
             mbProducts.addActionListener(e -> {
                 produkteDetailForm.show();
             });
-            conProducts.add(mbProducts);
+            conBorder.add(mbProducts);
         }
+        conProducts.add(BorderLayout.CENTER, conBorder);
         this.add(conProducts);
         initGuiBuilderComponents(resourceObjectInstance);
 

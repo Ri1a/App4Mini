@@ -20,8 +20,7 @@ import java.util.List;
 
 /**
  *
- * @author Riccardo, Joel, Yanick, Alain
- * Version: 1.0.0
+ * @author Riccardo, Joel, Yanick, Alain Version: 1.0.0
  */
 public class BestellungenForm extends com.codename1.ui.Form {
 
@@ -65,7 +64,8 @@ public class BestellungenForm extends com.codename1.ui.Form {
 
         //Show orders in app
         //TODO: Scrolling not working
-        Container conOrders = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        Container conOrders = new Container(new BorderLayout());
+        Container conBorder = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         conOrders.setScrollableY(true);
         conOrders.setUIID("conOrders");
 
@@ -157,9 +157,9 @@ public class BestellungenForm extends com.codename1.ui.Form {
             mbOrders.addActionListener(e -> {
                 bestellungDetailForm.show();
             });
-            conOrders.add(mbOrders);
+            conBorder.add(mbOrders);
         }
-
+        conOrders.add(BorderLayout.CENTER, conBorder);
         //Tabs for filter
         Tabs t = new Tabs();
         Style s = UIManager.getInstance().getComponentStyle("Tab");
