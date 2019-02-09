@@ -17,7 +17,7 @@ Now you can login with your shopname and the two keys.
 
 Voilà!
 
-## Contributers
+## Collaborators
 
 [Riccardo Landolfo](https://github.com/RiccardoLandolfo)
 
