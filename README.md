@@ -12,7 +12,7 @@ Now you can login with your shopname and the two keys.
 
 Voilà!
 
-Screenshots:
+## Screenshots:
 
 ![App4Mini Index](/images/app4mini_index.png "Index Site")
 
