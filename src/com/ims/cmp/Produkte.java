@@ -5,6 +5,7 @@ import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.Dialog;
+import com.ims.idpa.app.IndexForm;
 import com.ims.idpa.app.LoginForm;
 import com.ims.idpa.app.WelcomeForm;
 import java.io.ByteArrayInputStream;
@@ -24,6 +25,8 @@ public class Produkte {
     ArrayList<String> productStock = new ArrayList<>();
     ArrayList<String> productDateCreated = new ArrayList<>();
     ArrayList<String> productImages = new ArrayList<>();
+    
+    int responseCode;
 
     public void getProdukte() throws JSONException {
 
@@ -51,6 +54,15 @@ public class Produkte {
                     productImages.add((String) image.get("src"));
                 }
             }
+            
+            //Check if connection was successfull
+            responseCode = r.getResponseCode();
+            
+            if(responseCode != 200) {
+                Dialog.show("Es konnte keine Verbindung hergestellt werden.", "", "OK", null);
+                new IndexForm().show();
+            }
+            
         } catch (IOException e) {
             loginForm.show();
             Dialog.show("Produkte konnten nicht angezeigt werden.", "", "OK", null);
