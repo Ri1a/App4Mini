@@ -17,7 +17,18 @@ Now you can login with your shopname and the two keys.
 
 Voilà!
 
-## Screenshots:
+## Contributers
+
+[Riccardo Landolfo](https://github.com/RiccardoLandolfo)
+
+[Yanick Schlatter](https://github.com/YanickSchlatter)
+
+[Joel Eugster](https://github.com/joeleugster)
+
+[Alain Sager](https://github.com/AlainSager)
+
+
+## Screenshots
 
 ![App4Mini Index](/images/app4mini_index.png "Index Site")
 
