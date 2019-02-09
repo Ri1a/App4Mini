@@ -1,4 +1,6 @@
 ![Travis Ci](https://travis-ci.org/RiccardoLandolfo/App4Mini.svg?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
 
 
 # App4Mini
