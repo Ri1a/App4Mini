@@ -1,4 +1,5 @@
-https://travis-ci.org/RiccardoLandolfo/App4Mini.svg?branch=master
+![Travis Ci](https://travis-ci.org/RiccardoLandolfo/App4Mini.svg?branch=master)
+
 
 # App4Mini
 
