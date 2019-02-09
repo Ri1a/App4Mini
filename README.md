@@ -1,3 +1,5 @@
+https://travis-ci.org/RiccardoLandolfo/App4Mini.svg?branch=master
+
 # App4Mini
 
 This mobile application let's you know if someone ordered something on your website. Also, you see what products are on your website.
