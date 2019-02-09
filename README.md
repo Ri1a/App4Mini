@@ -11,3 +11,13 @@ To be able to run this app you need to go to your Wordpress admin panel and gene
 Now you can login with your shopname and the two keys.
 
 Voilà!
+
+Screenshots:
+
+![App4Mini Index](/images/app4mini_index.png "Index Site")
+
+![App4Mini Menu](/images/app4mini_menu.png "Menu")
+
+![App4Mini Orders](/images/app4mini_orders.png "Orders Site")
+
+![App4Mini Products](/images/app4mini_products.png "Products Site")
